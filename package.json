@@ -10,7 +10,8 @@
     "pretty": "prettier --semi false --print-width 100 --single-quote --trailing-comma all --write \"src/**/*.js\"",
     "precommit": "lint-staged && npm run test",
     "test:unit": "jest",
-    "test": "npm run lint  && jest"
+    "test": "npm run lint  && jest",
+    "commit": "git-cz"
   },
   "lint-staged": {
     "*.js": [
@@ -30,6 +31,17 @@
       "<rootDir>/jest/setup.js"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
   "dependencies": {
     "expo": "~38.0.8",
     "expo-status-bar": "^1.0.2",
@@ -41,8 +53,12 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
+    "@commitlint/cli": "^9.1.1",
+    "@commitlint/config-conventional": "^9.1.1",
     "babel-eslint": "^10.1.0",
     "babel-preset-expo": "~8.1.0",
+    "commitizen": "^4.1.2",
+    "cz-conventional-changelog": "^3.2.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.5.0",
